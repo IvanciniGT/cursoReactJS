@@ -1,6 +1,6 @@
 .boton{
-  border: solid 1px #77AA77;
-  background-color: #AACCBB;
+  border: solid 1px #999999;
+  background-color: #BBBBBB;
   color:white;
   width:75px;
   height: 25px;
@@ -36,17 +36,44 @@
 
 .disco.full {
   margin: 20px;
-  border: solid 1px black;
+  border: solid 1px #999999;
+  background-color: #DDDDDD;
   display: grid;
   grid-template-columns: 300px 100%;
-  grid-template-rows: 50px 50px 50px 100%;
+  grid-template-rows: 90px 100%;
   min-height: 260px;
 }
-.disco.full .titulo,.autor,.fecha,.cancionesInfo{
+.disco.full .datosDisco{
+  grid-template-rows: 30px 30px 30px;
+  display: grid;
+}
+.disco.full .titulo,.disco.full .autor,.disco.full .fecha{
+  font-size: 15pt;
+  margin:10px;
+  margin-left: 130px;
+
+}
+.disco.full .boton{
+  display:inline-block;
+  margin-left:15px;
+  padding:3px 10px 3px 10px;
+  text-align:center;
+  width:80px;
+}
+.disco.full .cancionesInfo::before{
+  content:'Canciones del disco';
+  font-weight: bold;
+}
+.disco.full .cancionesInfo{
   grid-column: 2;
+  font-size: 15pt;
+  margin-top: 15px;
+  margin-left:20px;
 }
 .disco.full .imagen{
+  background-color: white;
   grid-column: 1;
+  grid-row: span 4;
   vertical-align: middle;
   text-align: center;
 }
@@ -55,6 +82,20 @@
   max-height: 250px;
 }
 
+.disco.full .titulo::before, .disco.full .autor::before, .disco.full .fecha::before{
+  width: 130px ;
+  position:absolute;
+  margin-left:-130px;
+  padding-left:20px;
+}
+.disco.full input{
+  margin-top:12px !important;
+  background-color: #DDE5DD;
+  border:none;
+  padding:10px;
+  padding-left:0px;
+  width:500px;
+}
 /*NORMAL */
 .disco.normal {
   margin: 20px;
@@ -64,7 +105,7 @@
   grid-template-rows: 20px 20px 20px 100%;
   min-height: 80px;
 }
-.disco.normal .titulo,.autor,.fecha,.cancionesInfo{
+.disco.normal .titulo,.disco.normal .autor,.disco.normal .fecha,.disco.normal .cancionesInfo{
   grid-column: 2;
 }
 .disco.normal .imagen{
@@ -83,7 +124,7 @@
   display: flex;
   min-height: 20px;
 }
-.disco.nano .titulo,.autor,.fecha,.cancionesInfo{
+.disco.nano .titulo,.disco.nano .autor,.disco.nano .fecha,.disco.nano .cancionesInfo{
   font-size:10px;
   margin-right:15px;
 }

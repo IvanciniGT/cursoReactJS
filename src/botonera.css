@@ -1,0 +1,75 @@
+.botonera{
+    width: 200px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    text-align: center;
+}
+.botonera *{
+    font-family: Arial;
+    font-size: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+.botonera div{
+    height:25px;
+}
+.botonera.cancel{
+    border: solid 1px rgb(161, 45, 45);
+    background-color: rgb(255, 220, 220);
+    width: 60px;
+    grid-column: 1;
+    grid-row: 1;
+    border-radius: 3px;
+  }
+.botonera.cancel::before{
+    content: 'Cancelar';
+}
+.botonera.retry{
+    border: solid 1px rgb(187, 139, 66);
+    background-color: rgb(251, 223, 191);
+    width: 60px;
+    grid-column: 2;
+    grid-row: 1;
+    border-radius: 3px;
+}
+.botonera.retry::before{
+    content: 'Reintentar';
+}
+.botonera.save{
+    border: solid 1px rgb(154, 177, 79);
+    background-color: rgb(236, 245, 184);
+    width: 60px;
+    grid-column: 2;
+    grid-row: 1;
+    border-radius: 3px;
+}
+.botonera.save::before{
+    content: 'Guardar';
+}
+
+.botonera.ok{
+    background-color: rgb(154, 177, 79);
+    width: 100% !important;
+    grid-column: span 2;
+    grid-row: 1;
+}
+.botonera.ok::before{
+    content: 'Datos guardardados correctamente';
+    color:white;
+    width: 100% !important;
+    grid-column: span 2;
+    grid-row: 1;
+}
+.botonera.error{
+    background-color: rgb(226, 139, 139);
+    width: 100% !important;
+    grid-column: 1;
+    grid-row: 2;
+}
+.botonera.error::before{
+    content: 'Los datos se han guardado correctamente';
+    color:white;
+    width: 100% !important;
+    grid-column: 1;
+    grid-row: 2;
+}
