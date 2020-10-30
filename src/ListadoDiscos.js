@@ -1,6 +1,8 @@
 import './ListadoDiscos.css';
 import React from 'react';
 import Disco from './Disco';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux'
 
 class ListadoDiscos extends React.Component {
   
@@ -10,19 +12,35 @@ class ListadoDiscos extends React.Component {
       'discos': [  ] ,
       'from': 0
     }
-    this.cargarDiscos();
+    this.cargarDiscos(0);
   }
 
-  cargarDiscos(){
+  componentDidMount(){
+    window.addEventListener("scroll",(e)=>this.scrolleando(e));
+//    window.onscroll=(e)=>this.scrolleando(e);
+  }
+  scrolleando(evento){
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight-200) {
+      this.cargarDiscos(5);
+    }  
+  }
 
-    fetch('http://localhost:8083/discos/_search',
+  componentWillReceiveProps(){
+    this.setState({ 
+      'discos': [  ] ,
+      'from': 0
+    },()=>this.cargarDiscos(0));
+  }
+  cargarDiscos(offset){
+
+    fetch('http://localhost:8083/discos/_search?q=titulo:'+this.props.filtro,
       {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({'size':5,'from':this.state.from})
+        body: JSON.stringify({'size':5,'from':this.state.from+offset})
       })
             .then(respuesta=>respuesta.json())
             .then(datos=>{
@@ -31,6 +49,7 @@ class ListadoDiscos extends React.Component {
                 (datos.hits.hits).forEach(objeto=>nuevosDiscos.push(objeto._id))
                 this.setState({ 
                   ...this.state,
+                  'from':this.state.from+offset,
                   'discos': [ ...this.state.discos,...nuevosDiscos  ] ,
                   }
                 )
@@ -49,4 +68,26 @@ class ListadoDiscos extends React.Component {
 
 }
 
-export default ListadoDiscos;
+//export default ListadoDiscos;
+
+ListadoDiscos.propTypes = {
+  filtro: PropTypes.string
+}
+
+//export default ComponenteA;
+
+//////////////////////////
+// VINCULACION CON REACT
+//////////////////////////
+
+const mapStateToProps = (state) => {
+  return {
+    filtro: state.filtro
+  }
+}
+
+const ListadoDiscosConectado = connect(
+  mapStateToProps,
+  ()=>{}
+)(ListadoDiscos);
+export default ListadoDiscosConectado
